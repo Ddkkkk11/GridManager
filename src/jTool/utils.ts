@@ -379,7 +379,15 @@ export const getBrowser = (): string => {
         return '-';
     }
 };
-
+// TODO 现在不能复用到右键菜单里面
+// 复制内容到剪切板
+export const copyToClipBoard = (rootDocumentElement: HTMLInputElement, copyText: string, gridManagerName: string, TD_FOCUS: string): void => {
+	const fakeCopy = rootDocumentElement;
+	fakeCopy.value = copyText;
+	console.log(fakeCopy.value, 'fakeCopy.value')
+	fakeCopy.select();
+	// rootDocument.execCommand('Copy');
+};
 // 返回的对象用于向jTool上extend时使用
 export default {
     isWindow,
