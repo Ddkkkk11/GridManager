@@ -146,6 +146,15 @@ const bindTrAndTdEvent = (_: string):void => {
 		const cellFocusEvent = event.cellFocus;
 		jTool(cellFocusEvent[TARGET]).on(cellFocusEvent[EVENTS], cellFocusEvent[SELECTOR], function () {
 			getTbody(_).find(`[${TD_FOCUS}]`).removeAttr(TD_FOCUS);
+			jTool(rootDocument).on('keydown', (e: KeyboardEvent) => {
+				if (e.keyCode === 67 && e.metaKey) {
+					const input = rootDocument.createElement('input');
+					input.value = getTbody(_).find(`[${TD_FOCUS}]`).text();
+					input.select();
+					rootDocument.execCommand('Copy');
+					jTool(rootDocument).off('keydown');
+				}
+			});
 			this.setAttribute(TD_FOCUS, '');
 		});
 	})();
