@@ -150,8 +150,10 @@ const bindTrAndTdEvent = (_: string):void => {
 				if (e.keyCode === 67 && e.metaKey) {
 					const input = rootDocument.createElement('input');
 					input.value = getTbody(_).find(`[${TD_FOCUS}]`).text();
+					rootDocument.body.appendChild(input);
 					input.select();
 					rootDocument.execCommand('Copy');
+					rootDocument.body.removeChild(input);
 					jTool(rootDocument).off('keydown');
 				}
 			});
